@@ -18,3 +18,5 @@ app.listen(PORT, () => {
 app.use('/', require('./routes/index'))
 app.use('/users', require('./routes/users'))
 
+// Set up static folder
+app.use(express.static('public'));
