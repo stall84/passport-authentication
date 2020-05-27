@@ -68,9 +68,22 @@ router.post('/register', (req,res,next) => {
                     email,
                     password
                 });
-
-                console.log(newUser)
-                res.send('Check Console for newUser')
+                // Hash password 
+                bcrypt.genSalt((err,salt) => {
+                    bcrypt.hash(newUser.password, salt, (err,hash) => {
+                        // simple error check
+                        if(err) throw err;
+                        // set password to the new hashed one
+                        newUser.password = hash;
+                        // save user with hashed pass
+                        newUser.save()
+                            .then(user => {
+                                console.log(`New User Created: ${user}`)
+                                res.redirect('/users/login')
+                            }).catch(err => console.log(err));
+                    })
+                })
+                
             }
         });
 
