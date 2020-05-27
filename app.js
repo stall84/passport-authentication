@@ -9,8 +9,8 @@ const db = require('./config/keys').mongoURI;
 // Connect to MongoDB
 mongoose.connect(db, { useNewUrlParser: true })
     .then( () => {
-        console.log('MongoDB Connected...')}
-        ).catch(err => {
+        console.log('MongoDB Connected...')
+    }).catch(err => {
             console.log(`Whoops, DB not connected: ${err}`)
         })
 
@@ -22,6 +22,9 @@ const PORT = process.env.PORT || 5000;
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+// Express body-parser
+app.use(express.urlencoded({ extended: false }));
 
 
 app.listen(PORT, () => {
