@@ -43,7 +43,7 @@ app.use(flash());
 app.use((req,res,next) => {
     // apparently this sets up global variables via middleware and res.locals
     res.locals.success_msg = req.flash('success_msg')
-    res.locals_error_msg = req.flash('error_msg')
+    res.locals.error_msg = req.flash('error_msg')
     next();
 })
 
